@@ -1,0 +1,14 @@
+{
+  "name": "samuraibs-test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx cypress open"
+  },
+  "author": "Lennon Araujo",
+  "license": "MIT",
+  "description": "Projeto de automação de testes de aceitação de ponta a ponta com o Cypress",
+  "devDependencies": {
+    "cypress": "^9.5.2"
+  }
+}

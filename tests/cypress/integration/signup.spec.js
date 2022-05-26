@@ -1,5 +1,7 @@
 /// <reference types = "Cypress" />
 
+import signup from '../support/pages/signup'
+
 describe('SignUp', () => {
   it('deve cadastrar um usuáro', () => {
     const user = {
@@ -12,24 +14,21 @@ describe('SignUp', () => {
       console.log(result)
     })
 
-    cy.visit('/signup')
+    signup.go()
+    signup.form(user)
+    signup.submit()
 
-    cy.get('input[placeholder="Nome"]').type(user.name)
-    cy.get('input[placeholder="E-mail"]').type(user.email)
-    cy.get('input[placeholder="Senha"]').type(user.password)
-
+    // Outra possibilidade de driblar o test
     // cy.intercept('POST', '/users', {
     //   statusCode: 200
     // }).as('postUser')
-
-    cy.contains('button', 'Cadastrar').click()
 
     // cy.wait('@postUser')
 
     cy.get('.toast')
       .should('be.visible')
       .find('p')
-      .should('have.text', 'Agora você pode fazer seu login no Samurai Barbershop!')
+      .should('have.text', 'Agora você se tornou um(a) Samurai, faça seu login para ver seus agendamentos!')
 
   })
 
@@ -54,13 +53,9 @@ describe('SignUp', () => {
       expect(response.status).to.be.equal(200)
     })
 
-    cy.visit('/signup')
-
-    cy.get('input[placeholder="Nome"]').type(user.name)
-    cy.get('input[placeholder="E-mail"]').type(user.email)
-    cy.get('input[placeholder="Senha"]').type(user.password)
-
-    cy.contains('button', 'Cadastrar').click()
+    signup.go()
+    signup.form(user)
+    signup.submit()
 
     cy.get('.toast')
       .should('be.visible')

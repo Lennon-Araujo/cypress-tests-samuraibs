@@ -1,4 +1,10 @@
+import toast from '../../components/toast'
 class SignUp {
+
+  constructor() {
+    this.toast = toast
+  }
+
   go() {
     cy.visit('/signup')
   }
@@ -11,6 +17,11 @@ class SignUp {
 
   submit() {
     cy.contains('button', 'Cadastrar').click()
+  }
+
+  alertHaveText(expectedText) {
+    cy.contains('.alert-error', expectedText)
+      .should('be.visible')
   }
 }
 export default new SignUp()

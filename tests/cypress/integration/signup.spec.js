@@ -32,27 +32,19 @@ describe('SignUp', () => {
   })
 
   context('deve apresentar mensagem de erro - usuário já cadastrado', function() {
+    const user = {
+      name: "Usuario teste",
+      email: "userteste@sbs.com",
+      password: "pwd123",
+      is_provider: true
+    }
+
+    before(function() {
+      cy.postUser(user)
+    })
+
     it('deve apresentar mensagem de erro - usuário já cadastrado', () => {
-  
-      const user = {
-        name: "Usuario teste",
-        email: "userteste@sbs.com",
-        password: "pwd123",
-        is_provider: true
-      }
-  
-      cy.task('removeUser', user.email).then(result => {
-        console.log(result)
-      })
-  
-      cy.request(
-        'POST',
-        'http://localhost:3333/users',
-        user
-      ).then(response => {
-        expect(response.status).to.be.equal(200)
-      })
-  
+
       signup.go()
       signup.form(user)
       signup.submit()

@@ -1,5 +1,12 @@
 {
   "baseUrl": "http://localhost:3000",
     "viewportWidth": 1440,
-    "viewportHeight": 900
+    "viewportHeight": 900,
+    "dbConfig": {
+      "host": "kashin.db.elephantsql.com",
+      "user": "wtshlohg",
+      "password": "BFiPNpxR4lJE3jC9UwmZDGiU51NaR2Cf",
+      "database": "wtshlohg",
+      "port": 5432
+    }
 }

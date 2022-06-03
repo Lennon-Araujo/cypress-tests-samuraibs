@@ -71,7 +71,7 @@ describe('Login', () => {
 
         login.form(user)
         login.submit()
-        login.alertHaveText('Informe um email válido')
+        login.alert.haveText('Informe um email válido')
       })
     })
   })
@@ -89,7 +89,7 @@ describe('Login', () => {
 
     alertMessages.forEach(function(alert) {
       it(`deve mostrar mensagem ${alert}`, function() {
-        login.alertHaveText(alert)
+        login.alert.haveText(alert)
       })
     })
   })

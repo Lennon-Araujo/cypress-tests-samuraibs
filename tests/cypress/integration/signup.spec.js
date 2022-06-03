@@ -68,7 +68,7 @@ describe('SignUp', () => {
 
         signup.form(user)
         signup.submit()
-        signup.alertHaveText('Pelo menos 6 caracteres')
+        signup.alert.haveText('Pelo menos 6 caracteres')
       })
     })
   })
@@ -87,7 +87,7 @@ describe('SignUp', () => {
 
     alertMessages.forEach(function(alert) {
       it(`deve mostrar mensagem ${alert}`, function() {
-        signup.alertHaveText(alert)
+        signup.alert.haveText(alert)
       })
     })
   })

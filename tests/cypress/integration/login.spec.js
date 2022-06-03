@@ -49,7 +49,7 @@ describe('Login', () => {
     })
   })
 
-  context.only('quando o formato do e-mail é inválido', function () {
+  context('quando o formato do e-mail é inválido', function () {
     const emails = [
       'teste.com.br',
       'yahoo.com',
@@ -72,6 +72,24 @@ describe('Login', () => {
         login.form(user)
         login.submit()
         login.alertHaveText('Informe um email válido')
+      })
+    })
+  })
+
+  context('deve verificar alertas com formulário em branco', function() {
+    let alertMessages = [
+      'E-mail é obrigatório',
+      'Senha é obrigatória'
+    ]
+
+    before(function() {
+      login.go()
+      login.submit()
+    })
+
+    alertMessages.forEach(function(alert) {
+      it(`deve mostrar mensagem ${alert}`, function() {
+        login.alertHaveText(alert)
       })
     })
   })

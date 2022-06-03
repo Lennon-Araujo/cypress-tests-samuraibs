@@ -48,4 +48,31 @@ describe('Login', () => {
       login.toast.shouldHaveText('Ocorreu um erro ao fazer login, verifique suas credenciais.')
     })
   })
+
+  context.only('quando o formato do e-mail é inválido', function () {
+    const emails = [
+      'teste.com.br',
+      'yahoo.com',
+      '@gmail.com',
+      '@',
+      '111',
+      'teste@',
+      '$&%&$%&&$%&',
+      'xpto123'
+    ]
+
+    before(function () {
+      login.go()
+    })
+
+    emails.forEach(function (email) {
+      it(`não deve logar com o e-mail: ${email}`, function () {
+        const user = { email: email, password: 'pwd123' }
+
+        login.form(user)
+        login.submit()
+        login.alertHaveText('Informe um email válido')
+      })
+    })
+  })
 })

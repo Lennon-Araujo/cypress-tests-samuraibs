@@ -11,8 +11,12 @@ class Login {
   }
 
   form(user) {
-    cy.get('input[placeholder$="email"]').type(user.email)
-    cy.get('input[placeholder*="senha"]').type(user.password)
+    cy.get('input[placeholder$="email"]')
+      .clear()
+      .type(user.email)
+    cy.get('input[placeholder*="senha"]')
+      .clear()
+      .type(user.password)
   }
 
   submit() {

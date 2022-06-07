@@ -27,13 +27,31 @@ module.exports = (on, config) => {
 
   on('task', {
     removeUser(email) {
-      return new Promise(function(resolve){
-        pool.query('DELETE FROM public.users WHERE email = $1', [email], function(error, result){
-          if (error) {
-            throw error
-          }
-          resolve({success: result})
-        })
+      return new Promise(function (resolve) {
+        pool.query(`DELETE FROM public.users
+                      WHERE email = $1`, [email],
+          function (error, result) {
+            if (error) {
+              throw error
+            }
+            resolve({ success: result })
+          })
+      })
+    },
+    getToken(email) {
+      return new Promise(function (resolve) {
+        pool.query(`SELECT token 
+                      FROM "public"."users" u 
+                      INNER JOIN "public"."user_tokens" ut 
+                      ON u.id = ut.user_id
+                      WHERE u.email = $1 
+                      ORDER BY ut.created_at`, [email],
+          function (error, result) {
+            if (error) {
+              throw error
+            }
+            resolve({ token: result.rows[0].token })
+          })
       })
     }
   })

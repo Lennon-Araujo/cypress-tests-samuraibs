@@ -1,6 +1,7 @@
 /// <reference types = "Cypress" />
 
 import recoPassPage from '../support/pages/recoverypass'
+import resetPassPage from '../support/pages/resetpass'
 
 describe('Recovery Password', () => {
   context('quando o usuário solicitar a recuperação de senha', function () {
@@ -38,7 +39,11 @@ describe('Recovery Password', () => {
     })
 
     it('deve', () => {
-      console.log(Cypress.env('recoveryToken'))
+      resetPassPage.go(Cypress.env('recoveryToken'))
+      resetPassPage.form('abc123', 'abc123')
+      resetPassPage.submit()
+
+      resetPassPage.toast.shouldHaveText('Agora você já pode logar com a sua nova senha secreta.')
     })
   })
 })
